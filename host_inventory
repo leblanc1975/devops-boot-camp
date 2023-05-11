@@ -1,0 +1,5 @@
+webservers:
+  hosts:
+    web01:
+       ansible_host: 44.195.89.189
+	
