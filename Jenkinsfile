@@ -19,14 +19,5 @@ pipeline {
 				sh 'mvn package'
 			}
 		}
-		stage('Deploying Application') {
-			steps {
-				script {
-					withEnv(['JENKINS_NODE_COOKIE=DONTKILL']) {
-						sh 'nohup java -jar ./target/springboot-bootcamp-0.0.1-SNAPSHOT.jar &'
-					}
-				}
-			}
-		}
 	}
 }
