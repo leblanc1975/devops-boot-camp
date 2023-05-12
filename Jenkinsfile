@@ -30,6 +30,12 @@ pipeline {
 				sh '. /etc/profile.d/sonar-scanner.sh'
 			}	
 		}
+		stage ('Analyzing Code Quality') {
+			steps {
+				sh '/opt/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=leblanc1975dev_devops-boot-camp -Dsonar.organization=leblanc1975dev -Dsonar.qualitygate.wait=true -Dsonar.qualitygate.timeout=300 -Dsonar.sources=src/main/java/ -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=d67c4b85768a72c6e8a2dd0190d5c7da5dc86baa'
+			}
+		}		
+
 		stage ('Deploying Application using Ansible') {
 	           steps {
 		        sh 'export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook --private-key=/home/ubuntu/.ssh/vm-instance-key.pem -i host_inventory deploy-artifact.yml'
